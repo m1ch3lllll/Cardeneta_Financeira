@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)file:///E:/Michel/Downloads/caderneta-financeira_1.html -->
+<!-- saved from url=(0055)file:///E:/Michel/Downloads/caderneta-financeira_4.html -->
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -542,10 +542,15 @@
   async function initMsal(){
     if(!onedriveConfigured) return;
     await msalInstance.initialize();
-    const resp = await msalInstance.handleRedirectPromise().catch(()=>null);
-    const accounts = msalInstance.getAllAccounts();
-    if(accounts.length > 0){
-      msalAccount = accounts[0];
+    setSyncState('syncing', 'Verificando login…', '');
+    const resp = await msalInstance.handleRedirectPromise().catch((e)=>{ console.error(e); return null; });
+    if(resp && resp.account){
+      msalAccount = resp.account;
+    } else {
+      const accounts = msalInstance.getAllAccounts();
+      if(accounts.length > 0) msalAccount = accounts[0];
+    }
+    if(msalAccount){
       setSyncState('connected', 'OneDrive conectado', 'Sincronizando…');
       await syncFromOneDrive();
       setSyncState('connected', 'OneDrive conectado', 'Dados sincronizados.');
@@ -560,30 +565,23 @@
       const res = await msalInstance.acquireTokenSilent({ scopes: ONEDRIVE_SCOPES, account: msalAccount });
       return res.accessToken;
     }catch(e){
-      const res = await msalInstance.acquireTokenPopup({ scopes: ONEDRIVE_SCOPES });
-      msalAccount = res.account;
-      return res.accessToken;
+      // Sessão expirou — manda de volta pro login da Microsoft (a página recarrega)
+      await msalInstance.acquireTokenRedirect({ scopes: ONEDRIVE_SCOPES, account: msalAccount });
     }
   }
 
   async function connectOneDrive(){
     if(!onedriveConfigured) return;
-    try{
-      setSyncState('syncing', 'Conectando…', '');
-      const res = await msalInstance.loginPopup({ scopes: ONEDRIVE_SCOPES });
-      msalAccount = res.account;
-      setSyncState('connected', 'OneDrive conectado', 'Sincronizando…');
-      await syncFromOneDrive();
-      setSyncState('connected', 'OneDrive conectado', 'Dados sincronizados.');
-    }catch(e){
-      console.error(e);
-      setSyncState('error', 'Falha ao conectar', 'Tente novamente.');
-    }
+    setSyncState('syncing', 'Redirecionando para login…', '');
+    // loginRedirect navega a própria página para o login da Microsoft — ao voltar,
+    // initMsal() (chamado no carregamento da página) processa o retorno.
+    await msalInstance.loginRedirect({ scopes: ONEDRIVE_SCOPES });
   }
 
   async function disconnectOneDrive(){
     if(msalAccount){
-      await msalInstance.logoutPopup({ account: msalAccount }).catch(()=>{});
+      await msalInstance.logoutRedirect({ account: msalAccount });
+      return;
     }
     msalAccount = null;
     setSyncState(null, 'Conectar OneDrive', '');
