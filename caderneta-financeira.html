@@ -391,28 +391,28 @@
           <label for="monthInput">Mês</label>
           <input type="month" id="monthInput">
         </div>
-        <button id="syncBtn" class="sync-btn error" type="button" disabled="" style="opacity: 0.6; cursor: not-allowed;">
+        <button id="syncBtn" class="sync-btn" type="button">
           <span class="dot" id="syncDot"></span>
-          <span id="syncLabel">OneDrive não configurado</span>
+          <span id="syncLabel">Conectar OneDrive</span>
         </button>
       </div>
     </div>
-    <p class="sync-status" id="syncStatus">Preencha ONEDRIVE_CLIENT_ID no código para ativar a sincronização.</p>
+    <p class="sync-status" id="syncStatus"></p>
 
     <div class="brass-rule"></div>
 
     <div class="summary">
       <div class="item receita">
         <div class="label">Receita do mês</div>
-        <div class="value" id="totalReceita">R$&nbsp;0,00</div>
+        <div class="value" id="totalReceita">R$ 0,00</div>
       </div>
       <div class="item despesa">
         <div class="label">Despesa do mês</div>
-        <div class="value" id="totalDespesa">R$&nbsp;0,00</div>
+        <div class="value" id="totalDespesa">R$ 0,00</div>
       </div>
       <div class="item saldo">
         <div class="label">Saldo</div>
-        <div class="value pos" id="totalSaldo">R$&nbsp;0,00</div>
+        <div class="value" id="totalSaldo">R$ 0,00</div>
       </div>
     </div>
   </div>
@@ -441,7 +441,7 @@
         <button type="submit" class="add-btn">+ Lançar receita</button>
       </form>
 
-      <div class="entries-list" id="listaReceitas"><div class="empty-msg">Nenhum lançamento neste mês.</div></div>
+      <div class="entries-list" id="listaReceitas"></div>
     </div>
 
     <!-- DESPESAS -->
@@ -473,7 +473,7 @@
         <button type="submit" class="add-btn">+ Lançar despesa</button>
       </form>
 
-      <div class="entries-list" id="listaDespesas"><div class="empty-msg">Nenhum lançamento neste mês.</div></div>
+      <div class="entries-list" id="listaDespesas"></div>
     </div>
   </div>
 
@@ -488,7 +488,7 @@
           <th class="num">Saldo</th>
         </tr>
       </thead>
-      <tbody id="historyBody"><tr><td colspan="4" style="color:var(--ink-soft); font-style:italic;">Nenhum histórico ainda.</td></tr></tbody>
+      <tbody id="historyBody"></tbody>
     </table>
   </div>
 
