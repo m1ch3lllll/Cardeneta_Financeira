@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)file:///E:/Michel/Downloads/caderneta-financeira_6.html -->
+<!-- saved from url=(0055)file:///E:/Michel/Downloads/caderneta-financeira_1.html -->
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -496,6 +496,9 @@
 </div>
 
 <script src="./caderneta-financeira_files/msal-browser.min.js.download"></script>
+<script type="text/javascript">
+  if(typeof msal === 'undefined') document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.38.3/js/msal-browser.min.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./caderneta-financeira_files/msal-browser.min(1).js.download" type="text/javascript"></script>
 <script>
   /* =========================================================
      CONFIGURAÇÃO DO ONEDRIVE — preencha antes de publicar
@@ -541,7 +544,7 @@
 
   async function initMsal(){
     if(!onedriveConfigured) return;
-    await msalInstance.initialize();
+    if(typeof msalInstance.initialize === 'function'){ await msalInstance.initialize(); }
     setSyncState('syncing', 'Verificando login…', '');
     const resp = await msalInstance.handleRedirectPromise().catch((e)=>{ console.error(e); return null; });
     if(resp && resp.account){
