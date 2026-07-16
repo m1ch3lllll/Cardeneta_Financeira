@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)file:///E:/Michel/Downloads/caderneta-financeira_1.html -->
+<!-- saved from url=(0055)file:///E:/Michel/Downloads/caderneta-financeira_2.html -->
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -404,15 +404,15 @@
     <div class="summary">
       <div class="item receita">
         <div class="label">Receita do mês</div>
-        <div class="value" id="totalReceita">R$ 0,00</div>
+        <div class="value" id="totalReceita">R$&nbsp;0,00</div>
       </div>
       <div class="item despesa">
         <div class="label">Despesa do mês</div>
-        <div class="value" id="totalDespesa">R$ 0,00</div>
+        <div class="value" id="totalDespesa">R$&nbsp;0,00</div>
       </div>
       <div class="item saldo">
         <div class="label">Saldo</div>
-        <div class="value" id="totalSaldo">R$ 0,00</div>
+        <div class="value pos" id="totalSaldo">R$&nbsp;0,00</div>
       </div>
     </div>
   </div>
@@ -441,7 +441,7 @@
         <button type="submit" class="add-btn">+ Lançar receita</button>
       </form>
 
-      <div class="entries-list" id="listaReceitas"></div>
+      <div class="entries-list" id="listaReceitas"><div class="empty-msg">Nenhum lançamento neste mês.</div></div>
     </div>
 
     <!-- DESPESAS -->
@@ -473,7 +473,7 @@
         <button type="submit" class="add-btn">+ Lançar despesa</button>
       </form>
 
-      <div class="entries-list" id="listaDespesas"></div>
+      <div class="entries-list" id="listaDespesas"><div class="empty-msg">Nenhum lançamento neste mês.</div></div>
     </div>
   </div>
 
@@ -488,7 +488,7 @@
           <th class="num">Saldo</th>
         </tr>
       </thead>
-      <tbody id="historyBody"></tbody>
+      <tbody id="historyBody"><tr><td colspan="4" style="color:var(--ink-soft); font-style:italic;">Nenhum histórico ainda.</td></tr></tbody>
     </table>
   </div>
 
@@ -497,8 +497,8 @@
 
 <script src="./caderneta-financeira_files/msal-browser.min.js.download"></script>
 <script type="text/javascript">
-  if(typeof msal === 'undefined') document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.38.3/js/msal-browser.min.js' type='text/javascript'%3E%3C/script%3E"));
-</script><script src="./caderneta-financeira_files/msal-browser.min(1).js.download" type="text/javascript"></script>
+  if(typeof msal === 'undefined') document.write(unescape("%3Cscript src='https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.38.2/lib/msal-browser.min.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
 <script>
   /* =========================================================
      CONFIGURAÇÃO DO ONEDRIVE — preencha antes de publicar
